@@ -9,9 +9,19 @@ body{
 img{
     width: 100%;
 }
+button{
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+}
 #cocktail{
     border-radius: 10px;
-    background-color: gainsboro;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
     border: solid 2px #32a1ce;
     width: 20%;
     justify-content: center;
