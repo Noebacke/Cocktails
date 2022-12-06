@@ -12,43 +12,55 @@ button.textContent = 'Click me';
 root.appendChild(button);
 root.appendChild(cocktailDiv);
 
-cocktailDiv.appendChild(titleH1);
-cocktailDiv.appendChild(instDiv);
-cocktailDiv.appendChild(imgApi);
-cocktailDiv.appendChild(catDiv);
-cocktailDiv.appendChild(ingreDiv);
-
 
 const fetchRandomCocktail = async () => {
     const responseCoktail = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-    return await responseCoktail.json();
+    const response = await responseCoktail.json();
+    return response.drinks[0];
+
 }
 
 button.addEventListener('click', async () => {
+    const randomDrink = await fetchRandomCocktail();
     
-    const response = await fetchRandomCocktail();
-    await listIngredient();
-    console.log(response);
-    const randomDrink = response.drinks[0];
-
     cocktailDiv.setAttribute('id', 'cocktail');
+    addElement('h1', `le nom du coktail est ${randomDrink.strDrink}`, null);
+    addElement('img', null , { 'src' : randomDrink.strDrinkThumb});
+    addElement('div', randomDrink.strInstructions, null);
+    addElement('div', randomDrink.strCategory, null);
 
-    titleH1.textContent = `le nom du coktail est ${randomDrink.strDrink}`;
-    imgApi.setAttribute('src', randomDrink.strDrinkThumb);
-    instDiv.textContent = randomDrink.strInstructions;
-    catDiv.textContent = randomDrink.strCategory;
-    listIngredient();
+    await listIngredient(randomDrink);
 
 })
 
-const listIngredient = async () => {
+const addElement = (element, text, attrs)=>{
+
+    const el = document.createElement(element);
+
+    if (attrs) {
+
+        for (const property in attrs) {
+            console.log(attrs[property])
+            console.log(property)
+            el.setAttribute(property, attrs[property]);
+        }
+        
+    }
+
+    if (text) {
+        el.textContent = text;
+    }
+
+    cocktailDiv.appendChild(el);
+        
+}
+
+const listIngredient = async (resDrinks) => {
     ingreDiv.textContent = "";
     for (let i = 0; i < 15; i++) {
-        const res = await fetchRandomCocktail();
         let valueArray = 1+i;
         let strIngredient = "strIngredient"+valueArray;
         let strQuant = "strMeasure"+valueArray;
-        let resDrinks = res.drinks[0];
         if(resDrinks[strIngredient] != null){
             ingreDiv.textContent += resDrinks[strIngredient] + " " +resDrinks[strQuant] + ""
         }
