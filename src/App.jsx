@@ -1,7 +1,6 @@
 import Footer from "./Footer";
 import Header from "./Header";
 import "./Css/App.css";
-import ListCocktails from "./ListCocktails";
 import FindCocktail from "./FindCocktail";
 
 function App() {

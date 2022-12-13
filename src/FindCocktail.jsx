@@ -1,4 +1,5 @@
 import { useState } from "react"
+import SearchForm from "./SearchForm";
 import ShowCocktail from "./ShowCocktail";
 import ShowResult from "./ShowResult";
 
@@ -29,14 +30,11 @@ const FindCocktail = ()=>{
     };
 
     return(
-        <form >
-            {/*Input qui appellera la fonction handleChange lors du submit*/}
-            <input type="text" placeholder="Recherche" onChange={(e) => handleChange(e)} />
-
-            {/* Pour afficher les cocktail, on se sert de notre composant ShowCocktail  */}
+        <div>
+            <SearchForm callback={handleChange}/>,
             <ShowResult result={cocktailData}/>
-            
-        </form>
+        </div>
+
     )
 };
 
