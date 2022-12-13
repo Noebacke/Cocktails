@@ -1,0 +1,11 @@
+.Cocktails_img{
+    width: 20%;
+}
+#block_of_cocktails{
+    padding: 20px;
+    background-color: floralwhite;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
